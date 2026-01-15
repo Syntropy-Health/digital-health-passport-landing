@@ -6,11 +6,11 @@ import { ArrowRight, Mail } from 'lucide-react'
 
 export function CTA() {
     return (
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-32 overflow-hidden bg-[#070b14]">
             {/* Background */}
             <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-b from-primary-900/20 via-accent-900/10 to-[#0a0a0a]" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-500/5 rounded-full blur-3xl" />
+                <div className="absolute inset-0 bg-gradient-to-b from-primary-900/20 via-mind-900/10 to-[#070b14]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-400/5 rounded-full blur-3xl" />
             </div>
 
             <div className="relative max-w-4xl mx-auto px-6 text-center">
@@ -21,14 +21,14 @@ export function CTA() {
                     transition={{ duration: 0.5 }}
                 >
                     <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                        Your Health Journey,
+                        Join the Bioconscious
                         <br />
-                        <span className="text-gradient bg-gradient-to-r from-primary-400 via-accent-400 to-primary-500 bg-clip-text text-transparent bg-300% animate-gradient">
-                            Finally Unified
+                        <span className="bg-gradient-to-r from-primary-400 via-vitality-400 to-mind-400 bg-clip-text text-transparent">
+                            Revolution
                         </span>
                     </h2>
                     <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10">
-                        Join the waitlist for early access. Be among the first to own your complete health story.
+                        Be among the first to own your complete health story. Prevention starts here.
                     </p>
 
                     {/* Email Input + CTA */}

@@ -32,8 +32,8 @@ const steps = [
 
 export function HowItWorks() {
     return (
-        <section className="relative py-32 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-900/5 to-transparent" />
+        <section className="relative py-32 overflow-hidden bg-[#070b14]">
+            <div className="absolute inset-0 bg-gradient-to-b from-mind-900/10 via-transparent to-primary-900/10" />
 
             <div className="relative max-w-7xl mx-auto px-6">
                 {/* Section Header */}
@@ -46,7 +46,7 @@ export function HowItWorks() {
                 >
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         How It{' '}
-                        <span className="text-gradient bg-gradient-to-r from-accent-400 to-primary-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-mind-400 to-primary-400 bg-clip-text text-transparent">
                             Works
                         </span>
                     </h2>
@@ -71,14 +71,14 @@ export function HowItWorks() {
                                 <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-white/20 to-transparent" />
                             )}
 
-                            <div className="relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+                            <div className="relative p-6 rounded-2xl bg-white/[0.02] border border-primary-400/10 hover:border-primary-400/20 transition-colors">
                                 <div className="text-5xl font-bold text-white/10 mb-4">{step.number}</div>
                                 <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
                                 <p className="text-white/60 mb-4">{step.description}</p>
                                 <ul className="space-y-2">
                                     {step.details.map((detail, i) => (
                                         <li key={i} className="flex items-center gap-2 text-sm text-white/50">
-                                            <Check className="w-4 h-4 text-primary-400 flex-shrink-0" />
+                                            <Check className="w-4 h-4 text-vitality-400 flex-shrink-0" />
                                             {detail}
                                         </li>
                                     ))}
