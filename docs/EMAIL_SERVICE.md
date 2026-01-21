@@ -33,28 +33,36 @@ This landing page uses **[Resend](https://resend.com)** for email collection and
 3. Name it `Digital Health Passport Waitlist`
 4. Copy the **Audience ID**
 
-### 4. Verify Domain (For Production)
+### 4. Configure Sender Domain
 
-For production emails, verify your domain:
+**Sandbox Domain (Testing/Development):**
+```
+noreply@drenuuzofn.resend.app
+```
 
+**Custom Domain (Production):**
+After DNS verification, use `syntropyhealth.bio`:
 1. Go to **Domains** → **Add Domain**
-2. Add `syntropyhealth.com` (or your domain)
+2. Add `syntropyhealth.bio`
 3. Add the DNS records Resend provides
 4. Wait for verification (usually < 5 minutes)
+5. Update `RESEND_FROM_EMAIL` to `hello@syntropyhealth.bio`
 
 ---
 
 ## Environment Variables
 
-Add these to your `.env.local` (development) or Vercel dashboard (production):
+Copy `.env.example` to `.env.local` and configure:
 
 ```bash
 # Required
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 
-# Optional (but recommended for production)
-RESEND_AUDIENCE_ID=aud_xxxxxxxxxxxx
-RESEND_FROM_EMAIL=hello@syntropyhealth.com
+# Sender email (use sandbox for testing, custom domain for production)
+RESEND_FROM_EMAIL=noreply@drenuuzofn.resend.app
+
+# Optional: Audience ID for contact management
+# RESEND_AUDIENCE_ID=aud_xxxxxxxxxxxx
 ```
 
 ### Setting in Vercel Dashboard
