@@ -5,6 +5,7 @@ on:
     branches: [main, dev-magic]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -19,8 +20,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
