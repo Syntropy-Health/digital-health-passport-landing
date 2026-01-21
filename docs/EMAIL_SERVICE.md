@@ -1,199 +1,91 @@
 # Email Collection Service
 
-This landing page uses **[Resend](https://resend.com)** for email collection and automation.
+Email collection via [Resend](https://resend.com) — 3,000 emails/month free.
 
-## Why Resend?
+## Setup
 
-- **Modern & Developer-First** — Built for developers with excellent DX
-- **Free Tier** — 3,000 emails/month, 100 contacts free
-- **Native Next.js Support** — First-class SDK integration
-- **GDPR Compliant** — Built-in unsubscribe and compliance features
-- **Audience Management** — Built-in contact lists and segmentation
+### 1. Get Resend API Key
+1. Sign up at [resend.com](https://resend.com)
+2. **API Keys** → Create key named `digital-health-passport`
+3. Copy key (starts with `re_`)
 
----
-
-## Quick Setup
-
-### 1. Create Resend Account
-
-1. Go to [resend.com](https://resend.com) and sign up
-2. Verify your email address
-
-### 2. Get API Key
-
-1. Navigate to **API Keys** in the Resend dashboard
-2. Click **Create API Key**
-3. Name it `digital-health-passport-prod`
-4. Copy the key (starts with `re_`)
-
-### 3. Create Audience (Optional but Recommended)
-
-1. Go to **Audiences** in Resend dashboard
-2. Click **Create Audience**
-3. Name it `Digital Health Passport Waitlist`
-4. Copy the **Audience ID**
-
-### 4. Configure Sender Domain
-
-**Sandbox Domain (Testing/Development):**
-```
-noreply@drenuuzofn.resend.app
-```
-
-**Custom Domain (Production):**
-After DNS verification, use `syntropyhealth.bio`:
-1. Go to **Domains** → **Add Domain**
-2. Add `syntropyhealth.bio`
-3. Add the DNS records Resend provides
-4. Wait for verification (usually < 5 minutes)
-5. Update `RESEND_FROM_EMAIL` to `hello@syntropyhealth.bio`
-
----
-
-## Environment Variables
-
-Copy `.env.example` to `.env.local` and configure:
-
+### 2. Configure Environment
+Copy `.env.example` to `.env.local`:
 ```bash
-# Required
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
-
-# Sender email (use sandbox for testing, custom domain for production)
 RESEND_FROM_EMAIL=noreply@drenuuzofn.resend.app
-
-# Optional: Audience ID for contact management
-# RESEND_AUDIENCE_ID=aud_xxxxxxxxxxxx
+# RESEND_AUDIENCE_ID=aud_xxxxxxxxxxxx  # Optional
 ```
 
-### Setting in Vercel Dashboard
+### 3. Sender Domains
 
-1. Go to [vercel.com](https://vercel.com) → Your Project → **Settings** → **Environment Variables**
-2. Add each variable:
-   | Name | Value | Environment |
-   |------|-------|-------------|
-   | `RESEND_API_KEY` | `re_xxx...` | Production, Preview |
-   | `RESEND_AUDIENCE_ID` | `aud_xxx...` | Production, Preview |
-   | `RESEND_FROM_EMAIL` | `hello@yourdomain.com` | Production |
+| Environment | Domain |
+|-------------|--------|
+| **Sandbox** | `noreply@drenuuzofn.resend.app` |
+| **Production** | `hello@syntropyhealth.bio` (after DNS verification) |
 
-3. Redeploy for changes to take effect
+To verify custom domain: **Resend Dashboard** → **Domains** → Add `syntropyhealth.bio` → Add DNS records.
 
 ---
 
-## API Endpoint
+## API
 
 ### `POST /api/subscribe`
 
-Subscribes an email to the waitlist.
-
 **Request:**
 ```json
-{
-  "email": "user@example.com"
-}
+{ "email": "user@example.com" }
 ```
 
-**Response (Success):**
-```json
-{
-  "success": true
-}
-```
+**Responses:**
+| Status | Body |
+|--------|------|
+| 200 | `{"success": true}` |
+| 400 | `{"error": "Valid email required"}` |
+| 503 | `{"error": "Email service not configured"}` |
 
-**Response (Error):**
-```json
-{
-  "error": "Valid email required"
-}
+**Flow:**
+1. Validate email format
+2. Add to Resend Audience (if `RESEND_AUDIENCE_ID` set)
+3. Send welcome email with Syntropy branding
+
+---
+
+## Test
+
+```bash
+# Local test
+curl -X POST http://localhost:3002/api/subscribe \
+  -H "Content-Type: application/json" \
+  -d '{"email": "test@example.com"}'
+
+# Expected: {"success":true}
 ```
 
 ---
 
-## Features
+## View Subscribers
 
-### What Happens on Subscribe
-
-1. ✅ Email validated
-2. ✅ Contact added to Resend Audience (if configured)
-3. ✅ Welcome email sent with Syntropy branding
-4. ✅ User sees success confirmation
-
-### Welcome Email
-
-The welcome email includes:
-- Syntropy Health branding
-- "Track. Understand. Prevent." messaging
-- Bioconscious Living™ theme
+**Resend Dashboard** → **Audiences** → Select audience → Export CSV
 
 ---
 
-## Viewing Subscribers
+## Customize Welcome Email
 
-### In Resend Dashboard
-
-1. Go to **Audiences** → Select your audience
-2. View all contacts, export as CSV
-3. Filter by date, status, etc.
-
-### Export Options
-
-- CSV export for import into other tools
-- API access for programmatic retrieval
-
----
-
-## Advanced: Custom Email Templates
-
-To customize the welcome email, edit:
-```
-src/app/api/subscribe/route.ts
-```
-
-The HTML template is in the `resend.emails.send()` call.
+Edit `src/app/api/subscribe/route.ts` — HTML template in `resend.emails.send()`.
 
 ---
 
 ## Troubleshooting
 
-### "Failed to subscribe" Error
-
-- Check `RESEND_API_KEY` is set correctly
-- Verify API key has send permissions
-- Check Resend dashboard for error logs
-
-### Emails Going to Spam
-
-- Verify your domain in Resend
-- Use a custom `from` email on your verified domain
-- Ensure proper SPF/DKIM records
-
-### Rate Limits
-
-Free tier: 3,000 emails/month, 100 emails/day
-If you exceed limits, upgrade or add rate limiting to the API.
-
----
-
-## Cost
-
-| Tier | Emails/Month | Contacts | Price |
-|------|--------------|----------|-------|
-| Free | 3,000 | 100 | $0 |
-| Pro | 50,000 | Unlimited | $20/mo |
-| Enterprise | Unlimited | Unlimited | Custom |
-
----
-
-## Security Notes
-
-- Never commit API keys to git
-- Use environment variables only
-- API key should have minimal permissions needed
-- Consider rate limiting for production
+| Issue | Solution |
+|-------|----------|
+| "Failed to subscribe" | Check `RESEND_API_KEY` in env vars |
+| Emails to spam | Verify domain, check SPF/DKIM |
+| Rate limited | Free: 3k/month, 100/day — upgrade or add throttling |
 
 ---
 
 ## Links
-
-- [Resend Documentation](https://resend.com/docs)
-- [Resend Next.js Guide](https://resend.com/docs/send-with-nextjs)
-- [API Reference](https://resend.com/docs/api-reference)
+- [Resend Docs](https://resend.com/docs)
+- [Next.js Integration](https://resend.com/docs/send-with-nextjs)
