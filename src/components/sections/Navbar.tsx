@@ -2,7 +2,8 @@
 
 import { Button } from '@/components/ui/Button'
 import { motion } from 'framer-motion'
-import { Heart, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export function Navbar() {
@@ -16,11 +17,16 @@ export function Navbar() {
             className="fixed top-0 left-0 right-0 z-50"
         >
             <div className="mx-auto max-w-7xl px-6 py-4">
-                <div className="flex items-center justify-between rounded-2xl bg-black/40 backdrop-blur-xl border border-white/5 px-6 py-3">
+                <div className="flex items-center justify-between rounded-2xl bg-[#070b14]/80 backdrop-blur-xl border border-primary-400/10 px-6 py-3">
                     {/* Logo */}
-                    <a href="/" className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                            <Heart className="w-4 h-4 text-white" />
+                    <a href="/" className="flex items-center gap-3">
+                        <div className="w-8 h-8 relative">
+                            <Image
+                                src="/syntropy.svg"
+                                alt="Syntropy Health"
+                                fill
+                                className="object-contain"
+                            />
                         </div>
                         <span className="font-semibold text-white hidden sm:block">Health Passport</span>
                     </a>

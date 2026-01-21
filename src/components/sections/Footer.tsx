@@ -1,11 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Heart } from 'lucide-react'
+import Image from 'next/image'
 
 export function Footer() {
     return (
-        <footer className="relative py-12 border-t border-white/5">
+        <footer className="relative py-12 border-t border-primary-400/10 bg-[#070b14]">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     {/* Logo */}
@@ -13,10 +13,15 @@ export function Footer() {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        className="flex items-center gap-2"
+                        className="flex items-center gap-3"
                     >
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                            <Heart className="w-4 h-4 text-white" />
+                        <div className="w-8 h-8 relative">
+                            <Image
+                                src="/syntropy.svg"
+                                alt="Syntropy Health"
+                                fill
+                                className="object-contain"
+                            />
                         </div>
                         <span className="font-semibold text-white">Syntropy Health</span>
                     </motion.div>

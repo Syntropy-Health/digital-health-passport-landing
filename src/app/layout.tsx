@@ -3,12 +3,17 @@ import './globals.css'
 
 export const metadata: Metadata = {
     title: 'Longevity & Health Passport | Syntropy Health',
-    description: 'Your AI-powered diet log and health observability layer. Track, understand, and optimize your wellness journey with intelligent insights.',
-    keywords: ['health passport', 'diet tracking', 'longevity', 'wellness', 'AI health', 'biomarker tracking'],
+    description: 'Your dietary observability layer for Bioconscious Living™. Track, understand, and prevent health issues before they begin.',
+    keywords: ['health passport', 'dietary observability', 'longevity', 'bioconscious', 'DietonAI', 'preventative health'],
     openGraph: {
-        title: 'Longevity & Health Passport',
-        description: 'Your AI-powered diet log and health observability layer.',
+        title: 'Longevity & Health Passport | Syntropy Health',
+        description: 'The last generation to need hospitals for preventable conditions.',
         type: 'website',
+        siteName: 'Syntropy Health',
+    },
+    icons: {
+        icon: '/favicon.ico',
+        apple: '/apple-touch-icon.png',
     },
 }
 
@@ -19,7 +24,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="bg-[#0a0a0a] text-white antialiased">
+            <body className="bg-[#070b14] text-white antialiased">
                 {children}
             </body>
         </html>
