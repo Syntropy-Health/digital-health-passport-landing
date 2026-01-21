@@ -1,58 +1,52 @@
-# Longevity & Health Passport Landing Page
+# Digital Health Passport Landing
 
-A sleek, modern landing page for Syntropy Health's Digital Health Passport product.
+Syntropy Health's waitlist landing page with email collection.
+
+## Quick Start
+
+```bash
+cp .env.example .env.local  # Configure environment
+npm install
+npm run dev                 # http://localhost:3000
+```
 
 ## Tech Stack
 
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first styling
-- **Framer Motion** - Smooth animations
-- **Lucide React** - Beautiful icons
-
-## Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-```
+- **Next.js 14** — App Router, API Routes
+- **TypeScript** — Type safety
+- **Tailwind CSS** — Styling
+- **Framer Motion** — Animations
+- **Resend** — Email collection
 
 ## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── globals.css      # Global styles & Tailwind
-│   ├── layout.tsx       # Root layout
-│   └── page.tsx         # Home page
+│   ├── api/subscribe/    # Email subscription endpoint
+│   ├── page.tsx          # Landing page
+│   └── layout.tsx
 ├── components/
-│   ├── sections/        # Page sections
-│   │   ├── Hero.tsx
-│   │   ├── Features.tsx
-│   │   ├── HowItWorks.tsx
-│   │   ├── CTA.tsx
-│   │   ├── Navbar.tsx
-│   │   └── Footer.tsx
-│   └── ui/              # Reusable components
-│       └── Button.tsx
-└── lib/
-    └── utils.ts         # Utility functions
+│   ├── sections/         # Hero, CTA, Footer, etc.
+│   └── ui/               # Button, PassportCard
+docs/
+├── EMAIL_SERVICE.md      # Email setup & API
+├── CICD.md               # Deployment pipeline
 ```
 
-## Related Links
+## Documentation
 
-- [syntropyhealth.bio](https://syntropyhealth.bio)
-- [clinic.healome.one](https://clinic.healome.one)
+| Doc | Description |
+|-----|-------------|
+| [docs/EMAIL_SERVICE.md](docs/EMAIL_SERVICE.md) | Resend email setup, API endpoint, testing |
+| [docs/CICD.md](docs/CICD.md) | GitHub Actions → Vercel deployment |
+
+## Environment Variables
+
+See `.env.example` for required variables:
+- `RESEND_API_KEY` — Resend API key
+- `RESEND_FROM_EMAIL` — Sender email address
 
 ## Deployment
 
-This project is configured for static export. Run `npm run build` to generate a static site in the `out/` directory.
+Automated via GitHub Actions on push to `main` or `dev`. See [docs/CICD.md](docs/CICD.md).
