@@ -10,21 +10,20 @@ Email collection via [Resend](https://resend.com) — 3,000 emails/month free.
 3. Copy key (starts with `re_`)
 
 ### 2. Configure Environment
+
 Copy `.env.example` to `.env.local`:
+
 ```bash
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
-RESEND_FROM_EMAIL=noreply@drenuuzofn.resend.app
+RESEND_FROM_EMAIL=hello@syntropyhealth.bio
 # RESEND_AUDIENCE_ID=aud_xxxxxxxxxxxx  # Optional
 ```
 
-### 3. Sender Domains
+### 3. Sender Domain
 
-| Environment | Domain |
-|-------------|--------|
-| **Sandbox** | `noreply@drenuuzofn.resend.app` |
-| **Production** | `hello@syntropyhealth.bio` (after DNS verification) |
+**Production:** `hello@syntropyhealth.bio` (verified)
 
-To verify custom domain: **Resend Dashboard** → **Domains** → Add `syntropyhealth.bio` → Add DNS records.
+> **Note:** Resend sandbox domains require verification. Always use verified custom domain.
 
 ---
 
